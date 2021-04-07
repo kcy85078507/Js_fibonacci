@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        --main-text-color: white;
+        --main-div-bg-color: tomato;
+      }
+
+      button {
+        height: 2.5rem;
+        cursor: pointer;
+      }
+
+      #popup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        /* z-index: 1; */
+      }
+
+      .content {
+        padding: 30px;
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+      }
+
+      p {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      function openPopup() {
+        document.getElementById("popup").style.display = "";
+      }
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="javascript:openPopup();" value="확인">열려랏</button>
+    <h2>What is Lorem Ipsum?</h2>
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially
+      unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.
+    </p>
+
+    <div id="popup" class="hide">
+      <div class="content">
+        <p>나는야 레이어팝업</p>
+        <button onclick="javascript:closePopup();" value="닫기">닫기</button>
+      </div>
+    </div>
+  </body>
+</html>

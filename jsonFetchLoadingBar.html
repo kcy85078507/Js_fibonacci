@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        html, body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1rem;
+      }
+      .spinner {
+        animation: spin 2s linear infinite;
+      }
+      #loadingBar{
+          font-size: 5rem;
+      }
+      @keyframes spin {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="back" class="container">
+      <i id="loadingBar" style="display: none;" class="fas fa-spinner fa-10px fa-spin"></i>
+      <button onclick="getUser()">클릭</button>
+      <div id="userInfo"></div>
+    </div>
+
+    <script>
+      function LoadingBarStart() {
+        loadingBar.style.display = "block"    
+    }
+
+      function LoadingBarEnd() {
+        // $("#back, #loadingBar").hide();
+        // $("#back, #loadingBar").remove();
+        loadingBar.style.display = "none"    
+      }
+      let isReady = true;
+      function getUser() {
+        
+        const config = {
+          method: "get",
+        };
+        if(isReady){
+            isReady =false;
+            LoadingBarStart();
+            fetch("https://jsonplaceholder.typicode.com/users/2", config)
+                .then((response) => response.json())
+                .then((data) => {
+            //container  내부에  name email phone 요소를 넣었으면 좋았겠다.
+            //통신이 진행되는 동안 스피너로 피드백을 주면 좋았을 듯 하다 .
+            //통신 중에는 클릭이 되어서는 안된다 !
+            //동일한 내용이니, 이미 받아진 데이터라면 안 받아도 되지 않았나 싶음 .
+
+                 const name = document.createElement("div");
+                 const email = document.createElement("div");
+                const phone = document.createElement("div");
+                name.textContent = data.name;
+                email.textContent = data.email;
+            phone.textContent = data.phone;
+            const userInfo = document.getElementById("userInfo");
+            userInfo.appendChild(name);
+            userInfo.appendChild(email);
+            userInfo.appendChild(phone);
+            LoadingBarEnd();
+            isReady =true;
+          })
+          .catch((error) => console.log(error));
+        }
+        
+      }
+    </script>
+  </body>
+</html>

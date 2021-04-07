@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+    }
+  </style>
+  <body id="body">
+    <!-- <div class="box"></div> -->
+  </body>
+  <script>
+    // console.log(window.innerWidth); 화면 넓이
+    // console.log(window.innerHeight); 화면 높이
+
+    function makeRandPositionBox() {
+      const box = document.createElement("div");
+      box.className = "box";
+      box.style.top = `${Math.random() * window.innerHeight}px`;
+      box.style.left = `${Math.random() * window.innerWidth}px`;
+      box.addEventListener('click',()=>{
+          box.remove()
+      })
+      body.appendChild(box);
+    }
+    // setInterval(makeRandPositionBox,1000)
+  </script>
+</html>
